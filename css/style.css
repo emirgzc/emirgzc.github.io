@@ -442,7 +442,7 @@ ol {
 }
 
 .hero__items {
-	height: 1100px;
+	height: 100%;
 	padding: 0 40px;
 	display: -webkit-box;
 	display: -ms-flexbox;
