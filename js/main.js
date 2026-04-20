@@ -21,8 +21,9 @@ $(function () {
     const options = {
         containers: ['#swupMain', '#swupMenu'],
         animateHistoryBrowsing: true,
-        linkSelector: 'a:not([data-no-swup])',
-        animationSelector: '[class="mil-main-transition"]'
+        // Keep swup on internal navigation only.
+        linkSelector: 'a:not([data-no-swup]):not([target="_blank"]):not([href^="http"]):not([href^="mailto:"]):not([href^="tel:"])',
+        animationSelector: '.mil-main-transition'
     };
     const swup = new Swup(options);
 
@@ -119,10 +120,22 @@ $(function () {
     anchor scroll
 
     ***************************/
-    $(document).on('click', 'a[href^="#"]', function (event) {
-        event.preventDefault();
+    function isInvalidHashLink(href) {
+        return !href || href === '#' || href === '#.';
+    }
 
-        var target = $($.attr(this, 'href'));
+    $(document).on('click', 'a[href^="#"]', function (event) {
+        var href = $(this).attr('href');
+        if (isInvalidHashLink(href)) {
+            return;
+        }
+
+        var target = $(href);
+        if (!target.length) {
+            return;
+        }
+
+        event.preventDefault();
         var offset = 0;
 
         if ($(window).width() < 1200) {
@@ -366,6 +379,7 @@ $(function () {
     ***************************/
     $('.mil-menu-btn').on("click", function () {
         $('.mil-menu-btn').toggleClass('mil-active');
+        $('.mil-menu-btn').attr('aria-expanded', $('.mil-menu-btn').hasClass('mil-active'));
         $('.mil-menu').toggleClass('mil-active');
         $('.mil-menu-frame').toggleClass('mil-active');
     });
@@ -632,6 +646,7 @@ $(function () {
 
         ***************************/
         $('.mil-menu-btn').removeClass('mil-active');
+        $('.mil-menu-btn').attr('aria-expanded', false);
         $('.mil-menu').removeClass('mil-active');
         $('.mil-menu-frame').removeClass('mil-active');
         /***************************
