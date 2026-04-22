@@ -2195,9 +2195,9 @@ about
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2237,8 +2237,8 @@ about
      object-position: top;
 }
 .mil-about-quote .mil-quote {
-  padding-left: 30px;
-  width: calc(100% - 90px);
+  width: 100%;
+  white-space: nowrap;
 }
 @media screen and (max-width: 992px) {
   .mil-about-quote .mil-avatar {
@@ -2253,8 +2253,10 @@ about
   }
   .mil-about-quote .mil-quote {
     font-size: 16px;
-    padding-left: 30px;
-    width: calc(100% - 70px);
+    padding-left: 0;
+    width: 100%;
+    white-space: normal;
+    line-height: 1.4;
   }
 }
 
@@ -2824,12 +2826,18 @@ blog
 ------------------------------------------- */
 .mil-blog-card {
   display: block;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(229, 229, 229);
+  border-radius: 14px;
+  overflow: hidden;
+  -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .mil-blog-card .mil-cover-frame {
   position: relative;
   overflow: hidden;
   padding-bottom: 65%;
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
 .mil-blog-card .mil-cover-frame img {
   width: 100%;
@@ -2845,14 +2853,22 @@ blog
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .mil-blog-card .mil-post-descr {
-  padding: 30px 30px 0 0;
+  padding: 24px;
+  min-height: 220px;
 }
 .mil-blog-card .mil-post-descr .mil-post-text {
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.mil-blog-card:hover {
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+  -webkit-box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 .mil-blog-card:hover .mil-cover-frame img {
   -webkit-transform: scale(1.05);
@@ -4227,4 +4243,103 @@ html.is-animating .mil-menu-frame {
   opacity: 0;
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
+}
+
+/* -------------------------------------------
+
+mobile optimizations
+
+------------------------------------------- */
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  .mil-banner {
+    min-height: 100svh;
+    height: auto;
+  }
+  .mil-banner .mil-banner-content {
+    padding-top: 120px;
+    padding-bottom: 70px;
+  }
+  .mil-banner .mil-banner-content h1 {
+    font-size: 46px;
+    line-height: 1.1;
+    margin-bottom: 35px;
+  }
+  .mil-banner .mil-banner-content p {
+    margin-bottom: 35px !important;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .mil-btn-space {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .mil-banner .mil-button {
+    width: 100%;
+    max-width: 340px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding-left: 28px;
+  }
+  .mil-banner .mil-mobile-cta {
+    width: 100%;
+    max-width: 340px;
+    height: 60px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0 10px 0 28px;
+    border-radius: 70px;
+    letter-spacing: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgb(255, 255, 255) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .mil-about-quote {
+    display: block;
+  }
+  .mil-about-quote .mil-quote {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .mil-banner .mil-banner-content h1 {
+    font-size: 40px;
+  }
+  .mil-banner .mil-banner-content p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  .mil-banner .mil-button {
+    height: 56px;
+    max-width: 300px;
+    padding: 0 10px 0 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .mil-banner .mil-mobile-cta {
+    height: 56px;
+    max-width: 300px;
+    padding: 0 10px 0 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .mil-banner .mil-button svg {
+    width: 34px;
+    height: 34px;
+    margin-left: 14px;
+    padding: 8px;
+  }
 }
