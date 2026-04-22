@@ -1095,7 +1095,7 @@ about
 
 .mil-about-quote {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
     & .mil-avatar {
@@ -1130,8 +1130,9 @@ about
     }
 
     & .mil-quote {
-        padding-left: 30px;
-        width: calc(100% - 90px);
+        padding-left: 0;
+        width: 100%;
+        white-space: nowrap;
     }
 
     @media screen and (max-width: 992px) {
@@ -1149,8 +1150,116 @@ about
 
         & .mil-quote {
             font-size: 16px;
-            padding-left: 30px;
-            width: calc(100% - 70px);
+            padding-left: 0;
+            width: 100%;
+            white-space: normal;
+            line-height: 1.4;
+        }
+    }
+}
+
+/* -------------------------------------------
+
+mobile optimizations
+
+------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .mil-banner {
+        min-height: 100svh;
+        height: auto;
+
+        & .mil-banner-content {
+            padding-top: 120px;
+            padding-bottom: 70px;
+
+            & h1 {
+                font-size: 46px;
+                line-height: 1.1;
+                margin-bottom: 35px;
+            }
+
+            & p {
+                margin-bottom: 35px !important;
+                font-size: 18px;
+                line-height: 1.5;
+            }
+        }
+    }
+
+    .mil-btn-space {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .mil-banner .mil-button {
+        width: 100%;
+        max-width: 340px;
+        justify-content: space-between;
+        padding-left: 28px;
+    }
+
+    .mil-banner .mil-mobile-cta {
+        width: 100%;
+        max-width: 340px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px 0 28px;
+        border-radius: 70px;
+        letter-spacing: 2px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 500;
+        background-color: rgba(255, 255, 255, 0.08);
+        color: $light !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mil-about-quote {
+        display: block;
+
+        & .mil-quote {
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .mil-banner .mil-banner-content h1 {
+            font-size: 40px;
+        }
+
+        .mil-banner .mil-banner-content p {
+            font-size: 16px;
+            line-height: 1.45;
+        }
+
+        .mil-banner .mil-button {
+            height: 56px;
+            max-width: 300px;
+            padding: 0 10px 0 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .mil-banner .mil-mobile-cta {
+            height: 56px;
+            max-width: 300px;
+            padding: 0 10px 0 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .mil-banner .mil-button svg {
+            width: 34px;
+            height: 34px;
+            margin-left: 14px;
+            padding: 8px;
         }
     }
 }
@@ -1745,12 +1854,17 @@ blog
 
 .mil-blog-card {
     display: block;
+    background-color: $gs-5;
+    border: 1px solid $gs-10;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: $t-md;
 
     & .mil-cover-frame {
         position: relative;
         overflow: hidden;
         padding-bottom: 65%;
-        margin-bottom: 30px;
+        margin-bottom: 0;
 
         & img {
             width: 100%;
@@ -1765,18 +1879,23 @@ blog
     }
 
     & .mil-post-descr {
-        padding: 30px 30px 0 0;
+        padding: 24px;
+        min-height: 220px;
 
         & .mil-post-text {
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
     }
 
     &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+
         & .mil-cover-frame {
             & img {
                 transform: scale(1.05);
