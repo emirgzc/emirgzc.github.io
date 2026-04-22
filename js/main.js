@@ -22,7 +22,7 @@ $(function () {
         containers: ['#swupMain', '#swupMenu'],
         animateHistoryBrowsing: true,
         // Keep swup on internal navigation only.
-        linkSelector: 'a:not([data-no-swup]):not([target="_blank"]):not([href^="http"]):not([href^="mailto:"]):not([href^="tel:"])',
+        linkSelector: 'a:not([data-no-swup]):not([target="_blank"]):not([href^="http"]):not([href^="mailto:"]):not([href^="tel:"]):not([href^="#"])',
         animationSelector: '.mil-main-transition'
     };
     const swup = new Swup(options);
@@ -374,17 +374,6 @@ $(function () {
     });
     /***************************
 
-     menu
-
-    ***************************/
-    $('.mil-menu-btn').on("click", function () {
-        $('.mil-menu-btn').toggleClass('mil-active');
-        $('.mil-menu-btn').attr('aria-expanded', $('.mil-menu-btn').hasClass('mil-active'));
-        $('.mil-menu').toggleClass('mil-active');
-        $('.mil-menu-frame').toggleClass('mil-active');
-    });
-    /***************************
-
     main menu
 
     ***************************/
@@ -640,15 +629,6 @@ $(function () {
                 ScrollTrigger.refresh()
             },
         });
-        /***************************
-
-         menu
-
-        ***************************/
-        $('.mil-menu-btn').removeClass('mil-active');
-        $('.mil-menu-btn').attr('aria-expanded', false);
-        $('.mil-menu').removeClass('mil-active');
-        $('.mil-menu-frame').removeClass('mil-active');
         /***************************
 
         append
